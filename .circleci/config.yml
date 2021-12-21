@@ -28,7 +28,9 @@ jobs:
     steps:
       - checkout
       - run: 
-          command: python3 pythonserver.py
+          command: |
+            python3 pythonserver.py
+            quit()
    
   test:
     working_directory: ~/circleci-python
