@@ -9,12 +9,13 @@ jobs:
     machine: true
     steps:
       - checkout
-      - run: docker build -t veeru:$CIRCLE_BRA .
+      - run: docker build -t veeru .
   install-helm-chart:
     machine: true
     steps:
       - checkout
       - run: helm install mychart mycharts/.
+   
   test:
     working_directory: ~/circleci-python
     docker:
@@ -28,6 +29,7 @@ workflows:
     # Inside the workflow, you define the jobs you want to run.
     jobs:
       - build-and-test
+      - install-helm-chart
       - test:
           requires:
             - build-and-test
