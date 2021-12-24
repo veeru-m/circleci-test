@@ -14,6 +14,7 @@ jobs:
     machine: true
     steps:
       - checkout
+      - run: sudo snap install helm --classic
       - run: helm install mychart mycharts/.
    
   test:
