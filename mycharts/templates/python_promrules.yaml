@@ -1,0 +1,17 @@
+{{- if .Values.app.prometheusRule.enabled -}}
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: {{ include "prom-service-name" .}}
+  labels:
+    {{- if .Values.app.prometheusRule.labels }}
+      {{- toYaml .Values.app.prometheusRule.labels | nindent 4 }}
+    {{- end }}
+spec:
+{{- if .Values.app.prometheusRule.rules }}
+  groups:
+  - name: {{ .Release.Name }}.rules
+    rules: {{- toYaml .Values.app.prometheusRule.rules | nindent 4 }}
+{{- end }}
+{{- end }}
+

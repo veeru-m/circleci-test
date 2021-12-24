@@ -1,0 +1,24 @@
+{{- if .Values.app.serviceMonitor.enabled -}}
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: {{ include "prom-service-monitor" . }}
+  generation: 1
+  labels:
+    {{- if .Values.app.serviceMonitor.labels }}
+      {{- toYaml .Values.app.serviceMonitor.labels | nindent 4 }}
+    {{- end }}
+spec:
+  endpoints:
+  - path: /metrics
+    port: metrics
+  {{- if .Values.app.serviceMonitor.namespaceSelector }}
+  namespaceSelector: {{ toYaml .Values.app.serviceMonitor.namespaceSelector | nindent 4 }}
+  {{- end }}
+  {{- if .Values.app.serviceMonitor.selector.matchLabels }}
+  selector:
+    matchLabels:
+      {{- toYaml .Values.app.serviceMonitor.selector.matchLabels | nindent 6 }}
+  {{- end }}
+{{- end }}
+

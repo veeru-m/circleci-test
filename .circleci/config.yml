@@ -3,12 +3,23 @@
 version: 2.1
 orbs:
   python: circleci/python@1.2
+  aws-eks: circleci/aws-eks@0.2
+  helm: circleci/helm@1.0
 jobs:
   build-and-test:
     machine: true
     steps:
       - checkout
       - run: docker build -t veeru .
+  install-helm-chart:
+    executor: aws-eks/python
+    steps:
+      - aws-eks/update-kubeconfig-with-authenticator:
+          cluster-name: veeru-cluster
+      - helm/install-helm-chart:
+          chart: .
+          helm-version: v3.2.4
+          release-name: mychart
    
   test:
     working_directory: ~/circleci-python
@@ -23,6 +34,7 @@ workflows:
     # Inside the workflow, you define the jobs you want to run.
     jobs:
       - build-and-test
+      - install-helm-chart
       - test:
           requires:
             - build-and-test
