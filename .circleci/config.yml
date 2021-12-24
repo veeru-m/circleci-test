@@ -17,8 +17,9 @@ jobs:
       - aws-eks/update-kubeconfig-with-authenticator:
           cluster-name: veeru-cluster
       - helm/install-helm-chart:
+          chart: .
           helm-version: v3.2.4
-      - run: helm install mychart mycharts/.
+          release-name: mychart
    
   test:
     working_directory: ~/circleci-python
