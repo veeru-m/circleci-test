@@ -3,13 +3,18 @@
 version: 2.1
 orbs:
   python: circleci/python@1.2
+  helm: circleci/helm@1.0
 jobs:
   build-and-test:
     machine: true
     steps:
       - checkout
       - run: docker build -t veeru:$CIRCLE_BRA .
-   
+  install-helm-chart:
+    machine: true
+    steps:
+      - checkout
+      - run: helm install mychart mycharts/.
   test:
     working_directory: ~/circleci-python
     docker:

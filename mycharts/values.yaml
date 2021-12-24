@@ -1,0 +1,49 @@
+app:
+  name: python
+  replicaCount: 2
+  serviceType: NodePort
+
+  containersName: mycon
+  containersImage: webserver:local
+  containersImagePullPolicy: Never
+  containersEnvName: PORT
+  containersEnvValue: "80"
+  
+
+  prometheusRule:
+    enabled: true
+    name: prometheus-rule-object
+    labels: 
+      app: "python"
+
+    rules:
+      - alert: PrometheusJobMissing
+        expr: absent(up{job="pythonchart-service"})
+        for: 0m
+        labels:
+          severity: warning
+        annotations:
+          summary: Prometheus job missing (instance {{ $labels.instance }})
+          description: "A Prometheus job has disappeared\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+
+  serviceMonitor:
+    enabled: true
+    name: service-monitor-object
+    labels:
+      app: python
+      release: mychart
+    namespaceSelector:
+      any: true
+    selector:
+      matchLabels:
+        app: "python"
+
+
+#containers:
+#  name: mycon
+#  image: webserver:local
+#  imagePullPolicy: Never
+#  env:
+#    name: PORT
+#    value: "80"
+
