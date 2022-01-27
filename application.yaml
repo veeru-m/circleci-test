@@ -10,7 +10,7 @@ spec:
   source:
     chart: mycharts
     repoURL: https://github.com/veeru-m/circleci-test.git
-    targetRevision: main
+    targetRevision: HEAD
     helm:
       releaseName: myhelmchart
   destination:
