@@ -20,7 +20,7 @@ jobs:
       - run:
          name: helm template
          command: |
-           helm install temp mycharts
+           helm template temp mycharts
 workflows:
   sample:
     jobs:
