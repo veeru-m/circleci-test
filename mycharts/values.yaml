@@ -1,7 +1,7 @@
 app:
   name: python
   replicaCount: 2
-  serviceType: NodePort
+  serviceType:-NodePort
 
   containersName: mycon
   containersImage: webserver:local
