@@ -12,7 +12,17 @@ jobs:
          name: helm lint
          command: |
            helm lint mycharts
+  template:
+    docker:
+      - image: 'alpine/helm'
+    steps:
+      - checkout
+      - run:
+         name: helm template
+         command: |
+           helm template temp mycharts
 workflows:
   sample:
     jobs:
       - lint
+      - template
