@@ -1,0 +1,24 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: veeru-helm
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  source:
+    chart: mycharts
+    repoURL: https://github.com/veeru-m/circleci-test.git
+    targetRevision: HEAD
+    helm:
+      releaseName: myhelmchart
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: mychart
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+    automated:
+      selfHeal: true
+      prune: true
