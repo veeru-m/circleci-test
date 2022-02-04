@@ -9,8 +9,12 @@ jobs:
       - image: cimg/base:stable
     steps:
       - checkout
-      - docker/dockerlint:
-          dockerfile: Dockerfile
+      - run:
+         name: docker
+         command: |
+           npm install -g dockerlint
+           dockerlint .
+         
   lint:
     docker:
       - image: alpine/helm
