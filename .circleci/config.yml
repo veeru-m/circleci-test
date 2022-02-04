@@ -3,19 +3,7 @@
 version: 2.1
 orbs:
   docker: circleci/docker@2.0.1
-jobs:
-  docker_lint:
-    docker:
-      - image: cimg/base:stable
-    steps:
-      - checkout
-      - run:
-         name: docker
-         command: |
-           sudo apt-get install npm
-           npm install -g dockerlint
-           dockerlint .
-         
+jobs:    
   lint:
     docker:
       - image: alpine/helm
@@ -38,6 +26,6 @@ jobs:
 workflows:
   sample:
     jobs:
-      - docker_lint
+      - docker/hadolint
       - lint
       - template
