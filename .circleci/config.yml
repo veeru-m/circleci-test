@@ -25,7 +25,6 @@ jobs:
          name: helm template
          command: |
            docker build -t veeru .
-           helm template temp mycharts
 workflows:
   sample:
     jobs:
