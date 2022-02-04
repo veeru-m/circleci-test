@@ -16,7 +16,7 @@ jobs:
            helm template temp mycharts
   template:
     docker:
-      - image: cimg/base:stable
+      - image: alpine/helm
     steps:
       - checkout
       - setup_remote_docker:
