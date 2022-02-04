@@ -13,7 +13,7 @@ jobs:
           dockerfile: Dockerfile
   lint:
     docker:
-      - image: 'alpine/helm'
+      - image: cimg/base:stable
     steps:
       - checkout
       - run:
