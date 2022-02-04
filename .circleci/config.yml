@@ -18,9 +18,9 @@ jobs:
     docker:
       - image: 'alpine/helm'
     steps:
+      - checkout:
       - setup_remote_docker:
           docker_layer_caching: true
-      - checkout
       - run:
          name: helm template
          command: |
