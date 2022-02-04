@@ -19,6 +19,7 @@ jobs:
       - image: 'alpine/helm'
     steps:
       - checkout
+      - docker/hadolint
       - run:
          name: helm template
          command: |
@@ -26,6 +27,5 @@ jobs:
 workflows:
   sample:
     jobs:
-      - docker/hadolint
       - lint
       - template
