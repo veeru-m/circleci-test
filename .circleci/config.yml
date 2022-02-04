@@ -12,6 +12,7 @@ jobs:
       - run:
          name: docker
          command: |
+           apt-get install npm
            npm install -g dockerlint
            dockerlint .
          
