@@ -6,14 +6,14 @@ orbs:
 jobs:
   docker_lint:
     docker:
-      - image: 'alpine/helm'
+      - image: cimg/base:stable
     steps:
       - checkout
       - docker/dockerlint:
           dockerfile: Dockerfile
   lint:
     docker:
-      - image: cimg/base:stable
+      - image: alpine/helm
     steps:
       - checkout
       - run:
