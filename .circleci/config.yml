@@ -19,13 +19,12 @@ jobs:
       - image: 'alpine/helm'
     steps:
       - setup_remote_docker:
-          docker_layer_caching: false
-      - docker/build:
-          image: veeru
+          docker_layer_caching: true
       - checkout
       - run:
          name: helm template
          command: |
+           docker build -t veeru .
            helm template temp mycharts
 workflows:
   sample:
