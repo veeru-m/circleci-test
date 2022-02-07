@@ -16,15 +16,15 @@ jobs:
            helm template temp mycharts
   template:
     docker:
-      - image: alpine/helm  
+      - image: cimg/base:stable
     steps:
       - checkout
       - run:
-         name: docker
+         name: helm
          command: |
-           apk add --update docker openrc
-           rc-update add docker boot
-           docker build -t temp .
+           curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
+           chmod 700 get_helm.sh
+           ./get_helm.sh
 workflows:
   sample:
     jobs:
