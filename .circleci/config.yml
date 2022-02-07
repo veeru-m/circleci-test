@@ -22,10 +22,9 @@ jobs:
       - run:
          name: docker
          command: |
-           apk add docker docker-compose
+           apk add docker
            rc-update add docker boot
            service docker start
-           docker build -t test .
            
 workflows:
   sample:
