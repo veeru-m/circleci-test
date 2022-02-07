@@ -33,6 +33,9 @@ jobs:
            ./get_helm.sh
            helm lint mycharts
            helm template temp mycharts
+           helm package mycharts
+           helm push mycharts chartmuseum
+           ls
 workflows:
   sample:
     jobs:
