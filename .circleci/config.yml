@@ -19,6 +19,12 @@ jobs:
       - image: cimg/base:stable
     steps:
       - checkout
+      - setup_remote_docker:
+          docker_layer_caching: true
+      - run:
+         name: docker
+         command: |
+           docker build -t temp .
       - run:
          name: helm
          command: |
