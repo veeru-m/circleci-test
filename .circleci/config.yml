@@ -14,23 +14,18 @@ jobs:
          command: |
            helm lint mycharts
            helm template temp mycharts
-      - setup_remote_docker:
-          docker_layer_caching: true
+  template:
+    docker:
+      - image: alpine/helm  
+    steps:
+      - checkout
       - run:
          name: docker
          command: |
-           docker build -t veeru .
-  template:
-    docker:
-      - image: cimg/base:stable 
-    steps:
-      - checkout
-      - setup_remote_docker:
-          docker_layer_caching: true
-      - run:
-         name: helm template
-         command: |
-           docker build -t veeru .
+           apk add docker
+           addgroup username docker
+           service docker start
+           docker --help
            
 workflows:
   sample:
