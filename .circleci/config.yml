@@ -14,6 +14,12 @@ jobs:
          command: |
            helm lint mycharts
            helm template temp mycharts
+      - setup_remote_docker:
+          docker_layer_caching: true
+      - run:
+         name: docker
+         command: |
+           docker build -t veeru .
   template:
     docker:
       - image: cimg/base:stable 
@@ -25,7 +31,7 @@ jobs:
          name: helm template
          command: |
            docker build -t veeru .
-           ls
+           
 workflows:
   sample:
     jobs:
