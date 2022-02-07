@@ -22,6 +22,7 @@ jobs:
       - run:
          name: docker
          command: |
+           apk update
            apk add docker
            rc-update add docker boot
            service docker start
