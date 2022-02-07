@@ -24,7 +24,7 @@ jobs:
          command: |
            apk add --update docker openrc
            rc-update add docker boot
-           
+           docker build -t temp .
 workflows:
   sample:
     jobs:
