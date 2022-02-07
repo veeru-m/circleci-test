@@ -22,9 +22,8 @@ jobs:
       - run:
          name: docker
          command: |
-           apk add docker
-           addgroup username docker
-           service docker start
+           apk add --update docker openrc
+           rc-update add docker boot
            docker --help
            
 workflows:
