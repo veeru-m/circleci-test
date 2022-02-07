@@ -11,6 +11,18 @@ jobs:
     steps:
       - helm/lint:
           charts-dir: mycharts
+  alpine:
+    docker:
+      - image: alpine:latest   
+    steps:
+      - checkout
+      - run:
+         name: docker
+         command: |
+           apk add --update docker openrc
+           rc-update add docker boot
+           docker build -t temp .
+               
   lint:
     docker:
       - image: alpine/helm
@@ -47,4 +59,5 @@ workflows:
     jobs:
       - lint
       - template
+      - alpine
       #- banzai
