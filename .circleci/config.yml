@@ -26,6 +26,7 @@ jobs:
            chmod 700 get_helm.sh
            ./get_helm.sh
            helm lint mycharts
+           helm template temp mycharts
 workflows:
   sample:
     jobs:
