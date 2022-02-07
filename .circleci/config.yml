@@ -22,8 +22,9 @@ jobs:
       - run:
          name: docker
          command: |
-           apk add update 
-           apk add --no-cache docker-cli
+           apk add --update docker openrc
+           rc-update add docker boot
+           docker build -t test .
            
 workflows:
   sample:
