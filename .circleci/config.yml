@@ -57,9 +57,10 @@ jobs:
            helm plugin install https://github.com/sstarcher/helm-release
            helm lint mycharts
            helm template temp mycharts
-           echo $pipeline.git.tag
+           git_tag= << $pipeline.git.tag >>
+           echo $git_tag
            echo "git tab"
-           helm package --version=$pipeline.git.tag mycharts
+           helm package --version=$git_tag mycharts
            ls
 workflows:
   sample:
