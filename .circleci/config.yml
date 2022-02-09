@@ -41,19 +41,13 @@ jobs:
          command: |
            helm lint mycharts
            helm template temp mycharts
-           helm plugin install https://github.com/sstarcher/helm-release
+
 
   template:
     docker:
       - image: cimg/base:stable
     steps:
       - checkout
-      - setup_remote_docker:
-          docker_layer_caching: true
-      - run:
-         name: docker
-         command: |
-           docker build -t temp .
       - run:
          name: helm
          command: |
@@ -63,6 +57,7 @@ jobs:
            helm plugin install https://github.com/sstarcher/helm-release
            helm lint mycharts
            helm template temp mycharts
+           helm release mycharts
            helm package mycharts
         
            ls
