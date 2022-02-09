@@ -57,7 +57,7 @@ jobs:
            helm plugin install https://github.com/sstarcher/helm-release
            helm lint mycharts
            helm template temp mycharts
-           pre=$(sed -n '3p' mycharts/chart.yaml)
+           pre=$(sed -n '3p' mycharts/Chart.yaml)
            echo $pre
 workflows:
   sample:
