@@ -52,7 +52,7 @@ jobs:
            ./get_helm.sh
            helm lint mycharts
            helm template temp mycharts
-           helm install mycharts --dry-run --debug
+           helm install temp --dry-run --debug mycharts
            helm package mycharts
            ls
 workflows:
