@@ -60,7 +60,7 @@ jobs:
            VERSION=$(git describe --abbrev=0 --tags || $BRANCH)
            echo $VERSION
            echo "git tab"
-           helm package --version=$git_tag mycharts
+           helm package --version=$VERSION mycharts
            ls
 workflows:
   sample:
