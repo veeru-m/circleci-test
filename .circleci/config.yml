@@ -64,7 +64,7 @@ jobs:
            ./get_helm.sh
            helm lint mycharts
            helm template temp mycharts
-           wget https://get.helm.sh/chartmuseum-v0.14.0-linux-amd64.tar.gz
+           wget https://get.helm.sh/chartmuseum-v0.14.0-linux-amd64.tar.gz -O chartmuseum
            echo "file permision"
            chmod +x chartmuseum
            echo "executing"
