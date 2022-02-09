@@ -64,7 +64,9 @@ jobs:
            ./get_helm.sh
            helm lint mycharts
            helm template temp mycharts
-           curl https://raw.githubusercontent.com/helm/chartmuseum/main/scripts/get-chartmuseum
+           curl -fsSL -o chartmuseum.sh https://raw.githubusercontent.com/helm/chartmuseum/main/scripts/get-chartmuseum
+           chmod +x chartmuseum.sh
+           ./chartmuseum.sh
            chartmuseum --version
            chartmuseum --port=8080 --storage="local" --storage-local-rootdir="/temp/charts"
            helm repo add chartmuseum http://localhost:8080
