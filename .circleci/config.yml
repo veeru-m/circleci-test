@@ -65,7 +65,7 @@ workflows:
   sample:
     jobs:
       #- env_test
-      - lint
-      #- template
+      #- lint
+      - template
       #- alpine
       #- banzai
