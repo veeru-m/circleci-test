@@ -58,6 +58,7 @@ jobs:
            helm lint mycharts
            helm template temp mycharts
            pre=$(sed -n '3p' mycharts/Chart.yaml)
+           sed "/version/ a #$pre" mycharts/Chart.yaml
            echo $pre
 workflows:
   sample:
