@@ -15,7 +15,7 @@ jobs:
       - run:
          name: test
          command: |
-           version=$(MY_VAR+1)
+           version=$[MY_VAR+1]
            echo $version
   banzai:
     docker:
