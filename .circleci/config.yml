@@ -64,11 +64,11 @@ jobs:
            ./get_helm.sh
            helm lint mycharts
            helm template temp mycharts
-           wget https://raw.githubusercontent.com/helm/chartmuseum/main/scripts/get-chartmuseum -O chartmuseum.sh
+           wget https://get.helm.sh/chartmuseum-v0.14.0-linux-amd64.tar.gz
            echo "file permision"
-           chmod +x chartmuseum.sh
+           chmod +x chartmuseum
            echo "executing"
-           ./chartmuseum.sh
+           ./chartmuseum
            echo "finished"
            chartmuseum --version
            chartmuseum --port=8080 --storage="local" --storage-local-rootdir="/temp/charts"
