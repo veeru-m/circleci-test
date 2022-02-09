@@ -16,7 +16,8 @@ jobs:
          name: test
          command: |
            version=$[MY_VAR+1]
-           echo $version
+           echo $version >> BASH_ENV
+           set MY_VAR=BASH_ENV
   banzai:
     docker:
       - image: cimg/base:stable
