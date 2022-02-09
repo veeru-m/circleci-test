@@ -4,7 +4,19 @@ version: 2.1
 orbs:
   #docker: circleci/docker@2.0.1
   #helm: banzaicloud/helm@0.0.8
+
 jobs:
+  env_test:
+    docker:
+      - image: cimg/base:stable
+    environment:
+      MY_VAR: 1
+    steps:
+      - run:
+         name: test
+         command: |
+           version=$MY_VAR+1
+           echo $version
   banzai:
     docker:
       - image: cimg/base:stable
@@ -57,7 +69,8 @@ jobs:
 workflows:
   sample:
     jobs:
-      - lint
-      - template
+      - env_test
+      #- lint
+      #- template
       #- alpine
       #- banzai
