@@ -4,19 +4,15 @@ version: 2.1
 orbs:
   #docker: circleci/docker@2.0.1
   #helm: banzaicloud/helm@0.0.8
+  helm: bizzabo/helm@1.8.0
 
 jobs:
   env_test:
     docker:
       - image: cimg/base:stable
-    environment:
-      MY_VAR: 1
     steps:
-      - run:
-         name: test
-         command: |
-           version=$[MY_VAR+1]
-           echo $version 
+      - helm/lint:
+          helm-chart-path: mycharts
   banzai:
     docker:
       - image: cimg/base:stable
@@ -64,22 +60,13 @@ jobs:
            ./get_helm.sh
            helm lint mycharts
            helm template temp mycharts
-           wget https://get.helm.sh/chartmuseum-v0.14.0-linux-amd64.tar.gz -O chartmuseum.sh
-           echo "file permision"
-           chmod +x chartmuseum.sh
-           echo "executing"
-           ./chartmuseum.sh
-           echo "finished"
-           chartmuseum --version
-           chartmuseum --port=8080 --storage="local" --storage-local-rootdir="/temp/charts"
-           helm repo add chartmuseum http://localhost:8080
            helm package mycharts
            helm push mycharts/ chartmuseum
            ls
 workflows:
   sample:
     jobs:
-      #- env_test
+      - env_test
       #- lint
       - template
       #- alpine
