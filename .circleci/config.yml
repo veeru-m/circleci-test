@@ -64,7 +64,7 @@ jobs:
            ./get_helm.sh
            helm lint mycharts
            helm template temp mycharts
-           curl https://raw.githubusercontent.com/helm/chartmuseum/main/scripts/get-chartmuseum | bash
+           curl https://raw.githubusercontent.com/helm/chartmuseum/main/scripts/get-chartmuseum
            helm repo add chartmuseum http://localhost:8080
            helm package mycharts
            helm push mycharts/ chartmuseum
