@@ -41,6 +41,9 @@ jobs:
          command: |
            helm lint mycharts
            helm template temp mycharts
+           helm plugin install https://github.com/chartmuseum/helm-push
+           helm push mycharts/ chartmuseum
+
 
 
   template:
@@ -66,7 +69,7 @@ workflows:
   sample:
     jobs:
       #- env_test
-      #- lint
-      - template
+      - lint
+      #- template
       #- alpine
       #- banzai
