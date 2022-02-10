@@ -42,7 +42,7 @@ jobs:
            helm lint mycharts
            helm template temp mycharts
            helm plugin install https://github.com/chartmuseum/helm-push
-           helm push mycharts/ chartmuseum
+           helm cm-push mycharts/ chartmuseum
 
 
 
