@@ -64,8 +64,8 @@ jobs:
            
            echo $(git push -q https://${GIT_TOKEN}@github.com/veeru-m/circleci-test :$ver)
            git tag
-           #helm package --version=$VERSION mycharts
-           #ls
+           helm package --version=$VERSION mycharts
+           ls
 
   template:
     docker:
