@@ -66,7 +66,7 @@ jobs:
            git tag
            helm package --version=$VERSION mycharts
            ls
-           #testing 1
+           #testing 2
 
   template:
     docker:
