@@ -47,7 +47,7 @@ jobs:
            
            major=${ver%.*}
            minor=${ver#*.}
-           ((minor++))
+           minor=$((minor+1))
            new_tag="$major.$minor"
            echo $new_tag
            git tag $new_tag
