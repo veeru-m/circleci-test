@@ -63,9 +63,6 @@ jobs:
            #git push --tags -q https://${GIT_TOKEN}@github.com/veeru-m/circleci-test
            
            echo $(git push -q https://${GIT_TOKEN}@github.com/veeru-m/circleci-test :$ver)
-        
-
-           
            helm package --version=$VERSION mycharts
            ls
 
