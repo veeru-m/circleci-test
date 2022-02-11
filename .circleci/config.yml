@@ -51,20 +51,22 @@ jobs:
 
            major=${ver%.*}
            minor=${ver#*.}
-           minor=$((minor+1))
+           #minor=$((minor+1))
            new_tag="a$major.$minor"
-           echo "new_tag=$new_tag"
-           git tag $new_tag
+
+           semantic_tag="$major.$minor"
+           #git tag $new_tag
            #echo "git tags"
            #git tag
            #git tag -d $ver
            #echo "after deletion"
            #git tag
-           git push --tags -q https://${GIT_TOKEN}@github.com/veeru-m/circleci-test
+           helm package --version=$semantic_tag mycharts
+           #git push --tags -q https://${GIT_TOKEN}@github.com/veeru-m/circleci-test
            
-           #echo $(git push -q https://${GIT_TOKEN}@github.com/veeru-m/circleci-test :$ver)
+           echo $(git push -q https://${GIT_TOKEN}@github.com/veeru-m/circleci-test :$new_tag)
            #git tag
-           helm package --version=$new_tag mycharts
+           
            ls
            #testing 6
 
