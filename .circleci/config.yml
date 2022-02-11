@@ -43,11 +43,12 @@ jobs:
            helm template temp mycharts
            VERSION=$(git describe --tags | grep -Eo "[0-9].[0-9]-[0-9]+")
            echo $VERSION
-
-           IFS=. set $VERSION var1=$1 var2=$2
+           ver=$(echo $VERSION | grep -E0 "[0-9].[0-9]")
+           IFS=. set $ver var1=$1 var2=$2
            echo "$var1.$var2"
-           major=${VERSION%.*}
-           minor=${VERSION#*.}
+           major=${ver%.*}
+           minor=${ver#*.}
+           minor=$[minor+1]
            new_tag="$major.$minor"
            echo $new_tag
            git tag $new_tag
