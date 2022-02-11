@@ -44,18 +44,15 @@ jobs:
            VERSION=$(git describe --tags | grep -Eo "[0-9].[0-9]-[0-9]+")
            echo $VERSION
 
-           IFS=. set $VERSION
-           var1=$1
-           var2=$2
-           echo $var1.$var2
+           IFS=. set $VERSION var1=$1 var2=$2
+           echo "$var1.$var2"
            major=${VERSION%.*}
            minor=${VERSION#*.}
-           minor=$[minor+1]
-           new_tag=$major.$minor
-           echo new_tag
-           git tag new_tag
+           new_tag="$major.$minor"
+           echo $new_tag
+           git tag $new_tag
            git tag
-           git push origin new_tag
+           #git push origin new_tag
 
            echo "git tag"
            helm package --version=$VERSION mycharts
