@@ -41,10 +41,10 @@ jobs:
          command: |
            helm lint mycharts
            helm template temp mycharts
-           VERSION=$(git describe --tags | grep -Eo "[0-9]+.[0-9]+-[0-9]+")
+           VERSION=$(git tag -l --sort=refname "a*" | tail -1 | grep -Eo "[0-9]+.[0-9]+")
            #echo $VERSION
-           ver=$(echo $VERSION | grep -Eo "[0-9]+.[0-9]+")
-           echo $ver
+           ver=$VERSION
+           echo "peresent_ver=$ver"
            git config credential.helper 'cache --timeout=120'
            git config user.email "veeranjaneyule.m@amagi.com"
            git config user.name "veeru-m"
@@ -52,7 +52,7 @@ jobs:
            major=${ver%.*}
            minor=${ver#*.}
            minor=$((minor+1))
-           new_tag="$major.$minor"
+           new_tag="a$major.$minor"
            echo "new_tag=$new_tag"
            git tag $new_tag
            #echo "git tags"
