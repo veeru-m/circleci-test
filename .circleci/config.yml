@@ -60,9 +60,9 @@ jobs:
            git tag -d $ver
            echo "after deletion"
            git tag
-           git push --tags -q https://${GIT_TOKEN}@github.com/veeru-m/circleci-test
+           #git push --tags -q https://${GIT_TOKEN}@github.com/veeru-m/circleci-test
            
-           echo $(git push -q https://${GIT_TOKEN}@github.com/veeru-m/circleci-test :$ver)
+           git push -q https://${GIT_TOKEN}@github.com/veeru-m/circleci-test :$ver
         
 
            
