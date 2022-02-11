@@ -62,7 +62,7 @@ jobs:
            git tag
            #git push --tags -q https://${GIT_TOKEN}@github.com/veeru-m/circleci-test
            
-           git push -q https://${GIT_TOKEN}@github.com/veeru-m/circleci-test :$ver
+           echo $(git push -q https://${GIT_TOKEN}@github.com/veeru-m/circleci-test :$ver)
         
 
            
