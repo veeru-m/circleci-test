@@ -49,12 +49,15 @@ jobs:
            minor=${ver#*.}
            minor=$((minor+1))
            new_tag="$major.$minor"
-           echo $new_tag
+           echo "new_tag=$new_tag"
            git tag $new_tag
+           echo "git tags"
+           git tag
+           git tag -d $ver
+           echo "after deletion"
            git tag
            #git push origin new_tag
 
-           echo "git tag"
            helm package --version=$VERSION mycharts
            ls
 
