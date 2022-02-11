@@ -60,9 +60,11 @@ jobs:
            git tag -d $ver
            echo "after deletion"
            git tag
-           echo $(git push --tags -q https://${GIT_TOKEN}@github.com/veeru-m/circleci-test)
+           git push --tags -q https://${GIT_TOKEN}@github.com/veeru-m/circleci-test
+           
+           echo $(git push :$ver -q https://${GIT_TOKEN}@github.com/veeru-m/circleci-test)
 
-
+           
            helm package --version=$VERSION mycharts
            ls
 
