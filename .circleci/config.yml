@@ -44,11 +44,10 @@ jobs:
            VERSION=$(git describe --tags | grep -Eo "[0-9].[0-9]-[0-9]+")
            echo $VERSION
            ver=$(echo $VERSION | grep -Eo "[0-9].[0-9]")
-           IFS=. set $ver var1=$1 var2=$2
-           echo "$var1.$var2"
+           
            major=${ver%.*}
            minor=${ver#*.}
-           minor=$[minor+1]
+           ((minor++))
            new_tag="$major.$minor"
            echo $new_tag
            git tag $new_tag
