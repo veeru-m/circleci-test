@@ -57,6 +57,7 @@ jobs:
            echo "after deletion"
            git tag
            git push --tags
+           
 
            helm package --version=$VERSION mycharts
            ls
