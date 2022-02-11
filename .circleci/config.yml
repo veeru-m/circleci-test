@@ -41,10 +41,11 @@ jobs:
          command: |
            helm lint mycharts
            helm template temp mycharts
-           helm plugin install https://github.com/chartmuseum/helm-push
-           helm cm-push mycharts/ chartmuseum
-
-
+           VERSION=$(git describe --tags)
+           echo $VERSION
+           echo "git tab"
+           helm package --version=$VERSION mycharts
+           ls
 
   template:
     docker:
