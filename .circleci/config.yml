@@ -41,7 +41,7 @@ jobs:
          command: |
            helm lint mycharts
            helm template temp mycharts
-           VERSION=$(git describe --tags)
+           VERSION=$(git describe --tags | grep -E0 "[0-9].[0-9]-[0-9]+")
            echo $VERSION
            echo "git tab"
            helm package --version=$VERSION mycharts
