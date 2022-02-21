@@ -51,7 +51,7 @@ jobs:
            git config user.email "veeranjaneyule.m@amagi.com"
            git config user.name "veeru-m"
 
-           version=$(sed -n '/version/p' Chart.yaml)
+           version=$(sed -n '/version/p' mycharts/Chart.yaml)
            echo "$version"
 
            #major=${ver%.*}
