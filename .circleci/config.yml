@@ -49,18 +49,18 @@ jobs:
            git config user.name "veeru-m"
 
            version=$(sed -n '/version/p' mycharts/Chart.yaml)
-           version=$(echo $version | grep -Eo "[0-9]+.[0-9]+")
-           echo "$version"
-           major=${version:0:1}
-           minor=${version:2:2}
+           version1=$(echo $version | grep -Eo "[0-9]+.[0-9]+")
+           echo "$version1"
+           major=${version1:0:1}
+           minor=${version1:2:2}
            echo $major
            echo $minor
            minor=$((minor+1))
            semantic_tag="$major.$minor"
            echo "$semantic_tag"
 
-           #new_tag="a$major.$minor"
-           #git tag $new_tag
+           sed -i "s/$version/version: '$semantic_tag'/g" mycharts/Chart.yaml
+           cat mycharts/Chart.yaml
           
            #helm package --version=$semantic_tag mycharts
 
