@@ -47,10 +47,12 @@ jobs:
            version=$(sed -n '/version/p' mycharts/Chart.yaml)
            version1=$(echo $version | grep -Eo "[0-9]+.[0-9]+")
            echo "$version1"
+
            major=${version1:0:1}
            minor=${version1:2:2}
            echo $major
            echo $minor
+
            minor=$((minor+1))
            semantic_tag="$major.$minor"
            echo "$semantic_tag"
@@ -62,8 +64,8 @@ jobs:
            helm template temp mycharts
            helm package mycharts
            ls
-
-           #git push --tags -q https://${GIT_TOKEN}@github.com/veeru-m/circleci-test
+           git commit -am "updating version [ci skip]"
+           git push -q https://${GIT_TOKEN}@github.com/veeru-m/circleci-test
            
            #echo $(git push -q https://${GIT_TOKEN}@github.com/veeru-m/circleci-test :$new_tag)
            
