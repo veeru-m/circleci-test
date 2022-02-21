@@ -40,10 +40,6 @@ jobs:
       - run:
          name: helm lint
          command: |
-           #ls
-           #helm lint mycharts
-           #helm template temp mycharts
-
            git config credential.helper 'cache --timeout=120'
            git config user.email "veeranjaneyule.m@amagi.com"
            git config user.name "veeru-m"
@@ -61,8 +57,11 @@ jobs:
 
            sed -i "s/$version/version: '$semantic_tag'/g" mycharts/Chart.yaml
            cat mycharts/Chart.yaml
-          
-           #helm package --version=$semantic_tag mycharts
+
+           helm lint mycharts
+           helm template temp mycharts
+           helm package mycharts
+           ls
 
            #git push --tags -q https://${GIT_TOKEN}@github.com/veeru-m/circleci-test
            
