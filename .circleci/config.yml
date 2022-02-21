@@ -55,9 +55,9 @@ jobs:
            minor=${version:2:2}
            echo $major
            echo $minor
-           #minor=$((minor+1))
-
-           #semantic_tag="$major.$minor"
+           minor=$((minor+1))
+           semantic_tag="$major.$minor"
+           echo "$semantic_tag"
 
            #new_tag="a$major.$minor"
            #git tag $new_tag
