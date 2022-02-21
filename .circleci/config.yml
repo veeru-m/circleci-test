@@ -55,9 +55,6 @@ jobs:
            minor=${version:2:}
            echo $major
            echo $minor
-
-           #major=${ver%.*}
-           #minor=${ver#*.}
            #minor=$((minor+1))
 
            #semantic_tag="$major.$minor"
