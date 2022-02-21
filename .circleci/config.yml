@@ -40,6 +40,7 @@ jobs:
       - run:
          name: helm lint
          command: |
+           ls
            #helm lint mycharts
            #helm template temp mycharts
            #VERSION=$(git tag -l --sort=refname "a*" | tail -1 | grep -Eo "[0-9]+.[0-9]+")
@@ -50,7 +51,7 @@ jobs:
            git config user.email "veeranjaneyule.m@amagi.com"
            git config user.name "veeru-m"
 
-           version=$(sed -n '/version/p' chart.yaml)
+           version=$(sed -n '/version/p' Chart.yaml)
            echo "$version"
 
            #major=${ver%.*}
