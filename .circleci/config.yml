@@ -45,6 +45,7 @@ jobs:
            git config user.name "veeru-m"
 
            version=$(sed -n '/version/p' mycharts/Chart.yaml)
+           echo $version
            version1=$(echo $version | grep -Eo "[0-9]+.[0-9]+")
            echo "$version1"
 
