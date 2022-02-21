@@ -57,8 +57,8 @@ jobs:
            semantic_tag="$major.$minor"
            echo "$semantic_tag"
 
-           sed -i "s,$version,version: $semantic_tag,g" mycharts/Chart.yaml
-           cat mycharts/Chart.yaml
+           #sed -i "s,$version,version: $semantic_tag,g" mycharts/Chart.yaml
+           #cat mycharts/Chart.yaml
 
            #helm lint mycharts
            #helm template temp mycharts
