@@ -40,12 +40,9 @@ jobs:
       - run:
          name: helm lint
          command: |
-           ls
+           #ls
            #helm lint mycharts
            #helm template temp mycharts
-           #VERSION=$(git tag -l --sort=refname "a*" | tail -1 | grep -Eo "[0-9]+.[0-9]+")
-           #ver=$VERSION
-           #echo "peresent_ver=$ver"
 
            git config credential.helper 'cache --timeout=120'
            git config user.email "veeranjaneyule.m@amagi.com"
