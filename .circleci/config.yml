@@ -52,7 +52,7 @@ jobs:
            version=$(echo $version | grep -Eo "[0-9]+.[0-9]+")
            echo "$version"
            major=${version:0:1}
-           minor=${version:2:}
+           minor=${version:2:2}
            echo $major
            echo $minor
            #minor=$((minor+1))
