@@ -3,4 +3,4 @@ name: pythonchart
 version: '0.3'
 description: pythonserver helmchart
 appVersion: "1.16.0"
-#testing chart version 1
+#testing chart version 2
