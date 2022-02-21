@@ -34,6 +34,7 @@ jobs:
   lint:
     docker:
       - image: alpine/helm
+    working_directory: ~/mycharts
     steps:
       - checkout
       - run:
@@ -49,7 +50,7 @@ jobs:
            git config user.email "veeranjaneyule.m@amagi.com"
            git config user.name "veeru-m"
 
-           version=$(sed -n '/version/p' /mycharts/chart.yaml)
+           version=$(sed -n '/version/p' chart.yaml)
            echo "$version"
 
            #major=${ver%.*}
