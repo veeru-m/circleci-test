@@ -7,18 +7,6 @@ version: 2.1
   #helm: bizzabo/helm@1.8.0
 
 jobs:
-  env_test:
-    docker:
-      - image: cimg/base:stable
-    steps:
-      - helm/lint:
-          helm-chart-path: mycharts
-  banzai:
-    docker:
-      - image: cimg/base:stable
-    steps:
-      - helm/lint:
-          charts-dir: mycharts
   alpine:
     docker:
       - image: alpine:latest   
@@ -34,7 +22,6 @@ jobs:
   lint:
     docker:
       - image: alpine/helm
-    #working_directory: ~/mycharts/
     steps:
       - checkout
       - run:
@@ -98,8 +85,10 @@ workflows:
   sample:
     jobs:
       #- env_test
+      - template
       - lint:
           context: GITHUB_TOKEN
-      #- template
+          requires:
+            - template
       #- alpine
       #- banzai
