@@ -1,28 +1,86 @@
-# Use the latest 2.1 version of CircleCI pipeline process engine.
+# Use the latest 2.1 version of CircleCI pipeline process engine
 # See: https://circleci.com/docs/2.0/configuration-reference
 version: 2.1
+#orbs:
+  #docker: circleci/docker@2.0.1
+  #helm: banzaicloud/helm@0.0.8
+  #helm: bizzabo/helm@1.8.0
 
 jobs:
+  alpine:
+    docker:
+      - image: alpine:latest   
+    steps:
+      - checkout
+      - run:
+         name: docker
+         command: |
+           apk add --update docker openrc
+           rc-update add docker boot
+           docker build -t temp .
+               
   lint:
     docker:
-      - image: 'alpine/helm'
+      - image: alpine/helm
     steps:
       - checkout
       - run:
          name: helm lint
          command: |
-           helm lint mycharts
+
+           version=$(sed -n '/version:/p' mycharts/Chart.yaml)
+           echo $version
+           version1=$(echo $version | grep -Eo "[0-9]+.[0-9]+")
+           echo "present_version=$version1"
+
+           major=${version1:0:1}
+           minor=${version1:2:2}
+           echo $major
+           echo $minor
+
+           minor=$((minor+1))
+           semantic_tag="$major.$minor"
+           echo "semantic_tag=$semantic_tag"
+
+           sed -i "s/$version/version: '$semantic_tag'/g" mycharts/Chart.yaml
+           cat mycharts/Chart.yaml
+
+           #helm lint mycharts
+           #helm template temp mycharts
+           #helm package mycharts
+           #ls
+           #git commit -am "updating version [ci skip]"
+           #git push -q https://${GIT_TOKEN}@github.com/veeru-m/circleci-test
+           
+           #echo $(git push -q https://${GIT_TOKEN}@github.com/veeru-m/circleci-test :$new_tag)
+          
+           #git tag -l --sort=refname "a*"
+           #ls
+           
+           #testing 6
+
   template:
     docker:
-      - image: 'alpine/helm'
+      - image: cimg/base:stable
     steps:
       - checkout
       - run:
-         name: helm template
+         name: helm
          command: |
+           curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
+           chmod 700 get_helm.sh
+           ./get_helm.sh
+           helm plugin install https://github.com/sstarcher/helm-release
+           helm lint mycharts
            helm template temp mycharts
 workflows:
   sample:
     jobs:
-      - lint
+      #- env_test
       - template
+      - lint:
+          context: GITHUB_TOKEN
+          requires:
+            - template
+      #- alpine
+      #- banzai
