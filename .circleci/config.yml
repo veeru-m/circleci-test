@@ -76,11 +76,6 @@ jobs:
            helm plugin install https://github.com/sstarcher/helm-release
            helm lint mycharts
            helm template temp mycharts
-           VERSION=$(git describe --tags)
-           echo $VERSION
-           echo "git tab"
-           helm package --version=$VERSION mycharts
-           ls
 workflows:
   sample:
     jobs:
