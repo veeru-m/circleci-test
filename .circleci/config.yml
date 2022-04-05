@@ -35,12 +35,12 @@ jobs:
 
            major=${version1:0:1}
            minor=${version1:2:2}
-           echo $major
-           echo $minor
+           echo "major_version=$major"
+           echo "minor_version=$minor"
 
            minor=$((minor+1))
            semantic_tag="$major.$minor"
-           echo "semantic_tag=$semantic_tag"
+           echo "semantic_version=$semantic_tag"
 
            sed -i "s/$version/version: '$semantic_tag'/g" mycharts/Chart.yaml
            cat mycharts/Chart.yaml
